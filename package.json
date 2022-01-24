@@ -1,0 +1,93 @@
+{
+  "name": "lazy-new-file",
+  "displayName": "Lazy New File",
+  "description": "Lazily create files based on the current file path",
+  "repository": {
+    "url": "https://github.com/jhechtf/lazy-new-file.git",
+    "type": "git"
+  },
+  "license": "MIT",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:lazy-new-file.lazyNewFile"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lazy-new-file.lazyNewFile",
+        "title": "Lazy New File"
+      }
+    ],
+    "configuration": {
+      "title": "Lazy New File",
+      "properties": {
+        "lnf.alwaysUseCurrentFile": {
+          "title": "Always use current file",
+          "description": "Always default to the same base file location as the currently open file (disables workspace selector)",
+          "type": "boolean",
+          "default": true,
+          "scope": "resource"
+        },
+        "lnf.openAfterCreate": {
+          "title": "Open after create",
+          "description": "Open the new file after creating it.",
+          "type": "boolean",
+          "default": true,
+          "scope": "resource"
+        },
+        "lnf.showExplorerItem": {
+          "title": "Show \"Lazy New File\" in explorer contexts",
+          "description": "Allows lazy file creation",
+          "type": "boolean",
+          "default": true,
+          "scope": "resource"
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "group": "2_workspace",
+          "command": "lazy-new-file.lazyNewFile",
+          "alt": "Testing?",
+          "when": "config.lnf.showExplorerItem && !explorerResourceIsFolder"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.63.0",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "@vscode/test-electron": "^2.0.3",
+    "eslint": "^8.6.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.1.3",
+    "standard-version": "^9.3.2",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
