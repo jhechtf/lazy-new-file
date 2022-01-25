@@ -1,0 +1,23 @@
+name: "Publish to VSCode Marketplace"
+on:
+  workflow_run:
+    workflows:
+      - Release
+    types:
+      - completed
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+      - name: 'Setup Node'
+        uses: actions/setup-node@v2
+        with: 
+          node-version: 16.x
+      - name: 'Install dependencies'
+        run: npm ci
+      - name: 'Publish Extension'
+        run: npx vsce publish -p $VSCE_PAT
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
