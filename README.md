@@ -15,6 +15,7 @@ Contributes the following:
     _**NOTE**_: This will _ALWAYS_ default to the **root** of that workspace.
     2. `lnf.openAfterCreate` &ndash; Open the new file after creating it.
     3. `lnf.showExplorerItem` &ndash; show the "Lazy New File" item in the explorer context.
+    4. `lnf.aliases` &ndash; Aliases for the current workspace.
 3. Adds a "Lazy New File" to the context menu on the explorer files. Does not 
 show up for folders as the behavior is mimicked by VSCode already.
 
@@ -22,3 +23,26 @@ show up for folders as the behavior is mimicked by VSCode already.
 
 By default there are no added keybindings. I would recommend something 
 like `ctrl+alt+n` on Windows. 
+
+## Aliases
+
+Aliases should be unique among themselves and ***not*** nested. Both the shortcut and the expanded value should end with slashes
+
+### ✅ Examples of good aliases
+
+```json
+"lnf.aliases": {
+  "$src/": "${workspaceRoot}/src/",
+  "$lib/": "${workspaceRoot}/lib/"
+}
+```
+
+### ❌ Examples of bad aliases
+
+```json
+"lnf.aliases": {
+  "$src/": "${workspaceRoot}/src",
+  // This item will never be matched because the extensions exists on first match
+  "$src/lib": "${workspaceRoot}/src/lib"
+}
+```

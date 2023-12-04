@@ -13,9 +13,12 @@ interface CustomQuickPickItem extends QuickPickItem {
  * @returns the URI object that has been chosen.
  */
 export default async function getWorkspaceUri(def: string, forceDefault: boolean = false): Promise<Uri> {
+  console.info('getWorkspaceUri gets', def);
+  // If the default file path includes ./ then we need to resolve it to a full file path
   if(def.includes('./')) {
     def = resolve(def);
   }
+  // Create the original workspaceUri
   let workspaceUri: Uri = Uri.file(def);
   // If the workspace defaults to the '.' after going through the dirname
   // function, and we only have one workspace folder...
