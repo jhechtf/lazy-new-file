@@ -45,3 +45,4 @@ Aliases should be unique among themselves and ***not*** nested. Both the shortcu
   // This item will never be matched because the extensions exists on first match
   "$src/lib": "${workspaceRoot}/src/lib"
 }
+```
