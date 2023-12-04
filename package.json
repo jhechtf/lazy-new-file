@@ -33,7 +33,7 @@
           "description": "Replaces values to allow for easy creation in certain directories of the workspace",
           "type": "object",
           "default": {
-            "$/": "${workspaceRoot}"
+            "$/": "${workspaceRoot}/"
           }
         },
         "lnf.alwaysUseCurrentFile": {
