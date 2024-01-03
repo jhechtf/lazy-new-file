@@ -1,6 +1,7 @@
 {
   "name": "lazy-new-file",
   "displayName": "Lazy New File",
+  "publisher": "Jhecht",
   "description": "Lazily create files based on the current file path",
   "repository": {
     "url": "https://github.com/jhechtf/lazy-new-file.git",
@@ -28,7 +29,7 @@
     "configuration": {
       "title": "Lazy New File",
       "properties": {
-        "lnt.aliases": {
+        "lnf.aliases": {
           "title": "Aliases",
           "description": "Replaces values to allow for easy creation in certain directories of the workspace",
           "type": "object",
