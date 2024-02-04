@@ -65,7 +65,6 @@
         {
           "group": "2_workspace",
           "command": "lazy-new-file.lazyNewFile",
-          "alt": "Testing?",
           "when": "config.lnf.showExplorerItem && !explorerResourceIsFolder"
         }
       ]
