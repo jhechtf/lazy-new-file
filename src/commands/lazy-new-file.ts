@@ -66,13 +66,8 @@ export default commands.registerCommand(
       };
     });
 
-    let newFileName = await showQuickPickWithUserInput(configMapQuickPicks, { title: 'Hey Jim'});
-    console.info(newFileName);
     // grab the new file path
-    // let newFileName = await window.showInputBox({
-    //   title: "New File",
-    //   placeHolder: "Entr a new file name (or relative path/name)",
-    // });
+    let newFileName = await showQuickPickWithUserInput(configMapQuickPicks, { title: 'Hey Jim'});
 
     // The answer can be empty, in which case no action is taken.
     // But if we are given a value, we work to create the new file
