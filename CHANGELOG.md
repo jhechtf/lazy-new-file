@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/jhechtf/lazy-new-file/compare/v1.1.1...v1.2.0) (2024-02-22)
+
+
+### Features
+
+* Add quickpick options ([#4](https://github.com/jhechtf/lazy-new-file/issues/4)) ([a4be911](https://github.com/jhechtf/lazy-new-file/commit/a4be91121acf4d20f57a2d04a6cd546d903f2697))
+
 ### [1.1.1](https://github.com/jhechtf/lazy-new-file/compare/v1.1.0...v1.1.1) (2024-01-03)
 
 
