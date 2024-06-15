@@ -2,6 +2,8 @@
 
 Lazy new file allows you to quickly create a new file based on the path of the currently open file in your editor.
 
+Create one or multiple files in any project, quickly and easily.
+
 ## Contributes
 
 Contributes the following:
@@ -16,13 +18,32 @@ Contributes the following:
     2. `lnf.openAfterCreate` &ndash; Open the new file after creating it.
     3. `lnf.showExplorerItem` &ndash; show the "Lazy New File" item in the explorer context.
     4. `lnf.aliases` &ndash; Aliases for the current workspace.
+    5. `lnf.ladderOpen` &ndash; When creating multiple files, alternate between opening them on the left and right panes.
 3. Adds a "Lazy New File" to the context menu on the explorer files. Does not 
 show up for folders as the behavior is mimicked by VSCode already.
 
 ## Keybindings
 
 By default there are no added keybindings. I would recommend something 
-like `ctrl+alt+n` on Windows. 
+like `ctrl+alt+n` on Windows
+
+## Creating multiple files
+
+Creating multiple files in one prompt requires you to use a comma in the input field. The comma can be top level, or can be nested within a set of curly brackets(`{}`)
+
+These follow the same rules as the rest of the extension: if it matches an alias, it will be created from the given directory the alias is associated with.
+Otherwise it will be based on the current file.
+
+### Examples
+
+```
+# Assume we have `src/somefile.html` open
+
+`a.ts,b.ts` -> `src/a.ts` + `src/b.ts`
+`$routes/a/{+page.ts,+page.svelte}` -> `src/routes/a/+page.ts` + `src/routes/a/+page.svelte`
+`$root/a.ts,b.ts` -> `/a.ts` + `src/b.ts`
+`lib/{something/index.ts,something-else.ts,something-else-else.ts}` -> `src/lib/something/index.ts` + `src/lib/something-else.ts` + `src/lib/something-else-else.ts`
+```
 
 ## Aliases
 

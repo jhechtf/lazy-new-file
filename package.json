@@ -37,6 +37,13 @@
             "$/": "${workspaceRoot}/"
           }
         },
+        "lnf.ladderOpen": {
+          "title": "Ladder open files after creating",
+          "description": "When creating multiple files in one command, alternates which side of the screen they are opened on",
+          "type": "boolean",
+          "default": true,
+          "scope": "resource"
+        },
         "lnf.alwaysUseCurrentFile": {
           "title": "Always use current file",
           "description": "Always default to the same base file location as the currently open file (disables workspace selector)",
