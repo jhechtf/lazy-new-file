@@ -1,5 +1,5 @@
-import { resolve } from 'path';
-import { QuickPickItem, Uri, window, workspace } from 'vscode';
+import { resolve } from 'node:path';
+import { type QuickPickItem, Uri, window, workspace } from 'vscode';
 
 interface CustomQuickPickItem extends QuickPickItem {
 	name: string;

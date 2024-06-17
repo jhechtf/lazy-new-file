@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import type * as vscode from 'vscode';
 import lazyNewFile from './commands/lazy-new-file';
 import { configListener } from './config';
 

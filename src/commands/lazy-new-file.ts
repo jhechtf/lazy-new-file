@@ -2,17 +2,17 @@ import { dirname } from 'node:path';
 import {
 	type QuickPickItem,
 	type QuickPickOptions,
+	type TextDocumentShowOptions,
 	Uri,
+	ViewColumn,
 	WorkspaceEdit,
 	commands,
 	window,
 	workspace,
-	type TextDocumentShowOptions,
-	ViewColumn,
 } from 'vscode';
 import { config } from '../config';
-import getWorkspaceUri from '../workspaces';
 import { expandPathString } from '../util';
+import getWorkspaceUri from '../workspaces';
 
 function showQuickPickWithUserInput(
 	items: QuickPickItem[],

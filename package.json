@@ -86,9 +86,9 @@
     "watch-tests": "tsc -p . -w --outDir dist",
     "pretest": "npm run compile-tests && npm run compile",
     "test": "node ./dist/test/runTest.js",
-    "biome:lint": "biome lint --apply ./src",
+    "biome:lint": "biome lint --write ./src",
     "biome:format": "biome format --write ./src",
-    "biome:check": "biome check --apply ./src",
+    "biome:check": "biome check --write ./src",
     "wdio": "wdio run ./wdio.conf.ts"
   },
   "devDependencies": {
