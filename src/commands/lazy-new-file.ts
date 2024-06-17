@@ -7,8 +7,8 @@ import {
 	commands,
 	window,
 	workspace,
-  type TextDocumentShowOptions,
-  ViewColumn
+	type TextDocumentShowOptions,
+	ViewColumn,
 } from 'vscode';
 import { config } from '../config';
 import getWorkspaceUri from '../workspaces';
@@ -64,7 +64,7 @@ export default commands.registerCommand(
 		);
 
 		const configMap = config.get<Record<string, string>>('aliases') || {};
-    const ladderOpen = config.get('lnf.ladderOpen', true);
+		const ladderOpen = config.get('lnf.ladderOpen', true);
 
 		const workspaceRootUri = workspace.getWorkspaceFolder(
 			await getWorkspaceUri(
@@ -92,7 +92,7 @@ export default commands.registerCommand(
 			title: 'Enter the location of the new file',
 		});
 
-    const createdFiles: Uri[] = [];
+		const createdFiles: Uri[] = [];
 
 		// The answer can be empty, in which case no action is taken.
 		// But if we are given a value, we work to create the new file
@@ -119,42 +119,41 @@ export default commands.registerCommand(
 			// Iterate over the config map to see if there are any aliases present in the string
 			for (let filePathRaw of files) {
 				// We're going to need the file uri for a bit
-        let fileUri: Uri | undefined = undefined;
-        
+				let fileUri: Uri | undefined = undefined;
+
 				// iterate over the config map
 				for (const [key, value] of Object.entries(configMap)) {
-          // if the filepath includes the current key, replace that shit
+					// if the filepath includes the current key, replace that shit
 					if (filePathRaw.includes(key)) {
-            const replValue = value.replace('${workspaceRoot}', './');
+						const replValue = value.replace('${workspaceRoot}', './');
 						filePathRaw = filePathRaw.replace(key, './');
 						workspaceUri = Uri.joinPath(workspaceRoot, replValue);
-            fileUri = Uri.joinPath(workspaceUri, filePathRaw);
-            createdFiles.push(fileUri);
-            wse.createFile(fileUri);
-            break;
+						fileUri = Uri.joinPath(workspaceUri, filePathRaw);
+						createdFiles.push(fileUri);
+						wse.createFile(fileUri);
+						break;
 					}
 				}
 
-        // No match was found, so we just assume it's meant to be based off the current file
-        if(fileUri === undefined ) {
-          fileUri = Uri.joinPath(workspaceUri, filePathRaw);
-          createdFiles.push(fileUri);
-        }
-        wse.createFile(fileUri);
+				// No match was found, so we just assume it's meant to be based off the current file
+				if (fileUri === undefined) {
+					fileUri = Uri.joinPath(workspaceUri, filePathRaw);
+					createdFiles.push(fileUri);
+				}
+				wse.createFile(fileUri);
 			}
-      
-      let side = 0;
-			await workspace.applyEdit(wse);
-      
-      if(config.get('openAfterCreate', true)) {
-        for(const fileUri of createdFiles) {
 
-          await commands.executeCommand('vscode.openWith', fileUri, 'default', {
-            viewColumn: side === 0 ? ViewColumn.One : ViewColumn.Two
-          } as TextDocumentShowOptions);
-          if(ladderOpen) side = 1 - side;
-        }
-      }
+			let side = 0;
+			await workspace.applyEdit(wse);
+
+			if (config.get('openAfterCreate', true)) {
+				for (const fileUri of createdFiles) {
+					await commands.executeCommand('vscode.openWith', fileUri, 'default', {
+						viewColumn: side === 0 ? ViewColumn.One : ViewColumn.Two,
+					} as TextDocumentShowOptions);
+					if (ladderOpen) side = 1 - side;
+				}
+			}
 		}
 	},
 );
