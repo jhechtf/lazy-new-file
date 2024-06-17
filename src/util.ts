@@ -34,7 +34,7 @@ export function expandPathString(path: string): string[] {
   }
 
   if(match.length) {
-    for(let p of match.split(/\s?,\s?/)) {
+    for(const p of match.split(/\s?,\s?/)) {
       paths.push(`${base}${p}`);
     }
   }
