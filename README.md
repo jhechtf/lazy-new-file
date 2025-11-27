@@ -29,7 +29,16 @@ like `ctrl+alt+n` on Windows
 
 ## Creating multiple files
 
-Creating multiple files in one prompt requires you to use a comma in the input field. The comma can be top level, or can be nested within a set of curly brackets(`{}`)
+Creating multiple files in one prompt requires you to use a comma in the input field. The comma can be top level, or can be nested within a set of curly brackets(`{}`); e.g.
+
+```
+$components/expandable/{expandable.svelte,expandable.stories.svelte}
+```
+
+Will create two files in the folder where `$components/` is aliases: 
+
+1. `$components/expandable/expandable.svelte`
+2. `$components/expandable/expandable.stories.svelte`
 
 These follow the same rules as the rest of the extension: if it matches an alias, it will be created from the given directory the alias is associated with.
 Otherwise it will be based on the current file.
@@ -42,17 +51,27 @@ Otherwise it will be based on the current file.
 `a.ts,b.ts` -> `src/a.ts` + `src/b.ts`
 `$routes/a/{+page.ts,+page.svelte}` -> `src/routes/a/+page.ts` + `src/routes/a/+page.svelte`
 `$root/a.ts,b.ts` -> `/a.ts` + `src/b.ts`
+`$utils/components/bob.svelte` -> `packages/utils/src/components/bob.svelte`
 `lib/{something/index.ts,something-else.ts,something-else-else.ts}` -> `src/lib/something/index.ts` + `src/lib/something-else.ts` + `src/lib/something-else-else.ts`
 ```
 
+**NOTE**: by default the aliases begin with `$`, this is to mimic bundlers to some degree, but there is no hard rule that your aliases must begin with the the `$` symbol.
+
 ## Aliases
 
-Aliases should be unique among themselves and ***not*** nested. Both the shortcut and the expanded value should end with slashes
+Aliases should be unique among themselves and ***not*** nested. Both the shortcut and the expanded value should end with slashes.
+
+### Wildcard Matches
+Wildcard matches have been implemented recently, extending the syntax and unlocking setups for monorepos or specific nested file structures.
+
+The key for a wildcard match should contain one or more asterisks (`*`), and the replacement matcher should use the dollar sign, followed by a corresponding match number, e.g.
+`"@*/*/": "${workspaceRoot}/packages/$1/src/$2/`. These matches should still follow other rules for aliases.
 
 ### ✅ Examples of good aliases
 
 ```json
 "lnf.aliases": {
+  "$src/*/": "${workspaceRoot}/src/$1/",
   "$src/": "${workspaceRoot}/src/",
   "$lib/": "${workspaceRoot}/lib/"
 }
@@ -64,6 +83,18 @@ Aliases should be unique among themselves and ***not*** nested. Both the shortcu
 "lnf.aliases": {
   "$src/": "${workspaceRoot}/src",
   // This item will never be matched because the extensions exists on first match
-  "$src/lib": "${workspaceRoot}/src/lib"
+  "$src/*/": "${workspaceRoot}/src/$1/",
+  "$src/lib/": "${workspaceRoot}/src/lib/"
+}
+```
+
+## Workspaces
+
+If you are working a repository that utilizes workspaces, where there are multiple
+packages and apps, it can be useful to have it so that your aliases become aware of that. 
+
+```json
+"lnf.aliases": {
+  "$src/*/": "${workspaceRoot}/packages/$1/src/??"
 }
 ```
