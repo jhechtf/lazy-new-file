@@ -4,6 +4,14 @@ Lazy new file allows you to quickly create a new file based on the path of the c
 
 Create one or multiple files in any project, quickly and easily.
 
+## AI Usage
+
+I've used AI recently to help with this project. I was running into some issues with a new feature and didn't have the time to 
+really dig through why I was seeing the results I was. I've been using things like Claude code at work, and while I'm not an AI Evangelist,
+nor would I even consider myself a true fan of AI, it does have it's uses in places like this.
+
+I will always be critical of any external PR with AI.
+
 ## Contributes
 
 Contributes the following:
