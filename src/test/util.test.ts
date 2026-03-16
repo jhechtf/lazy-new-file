@@ -71,8 +71,35 @@ suite('findMatchingWorkspacePaths', () => {
 		};
 
 		const matchingWorkspacePaths = await findMatchingWorkspacePaths(config);
+		const sort = (arr: typeof matchingWorkspacePaths) =>
+			[...arr].sort((a, b) => `${a.key}${a.matchedKey}`.localeCompare(`${b.key}${b.matchedKey}`));
 
-		deepStrictEqual(matchingWorkspacePaths, []);
+		deepStrictEqual(sort(matchingWorkspacePaths), sort([
+			{
+				key: '$*/src/',
+				matchedKey: '$package-1/src/',
+				path: '${workspaceRoot}/packages/$1/src/',
+				matchedPath: '${workspaceRoot}/packages/package-1/src/',
+			},
+			{
+				key: '$*/src/',
+				matchedKey: '$package-2/src/',
+				path: '${workspaceRoot}/packages/$1/src/',
+				matchedPath: '${workspaceRoot}/packages/package-2/src/',
+			},
+			{
+				key: '$*/',
+				matchedKey: '$package-1/',
+				path: '${workspaceRoot}/packages/$1/',
+				matchedPath: '${workspaceRoot}/packages/package-1/',
+			},
+			{
+				key: '$*/',
+				matchedKey: '$package-2/',
+				path: '${workspaceRoot}/packages/$1/',
+				matchedPath: '${workspaceRoot}/packages/package-2/',
+			},
+		]));
 	});
 });
 
