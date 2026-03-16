@@ -10,7 +10,7 @@
   "license": "MIT",
   "version": "1.3.0",
   "engines": {
-    "vscode": "^1.100.0"
+    "vscode": "^1.105.0"
   },
   "categories": [
     "Other"
@@ -75,10 +75,11 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run package",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "package": "webpack --mode production --devtool hidden-source-map",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "vscode:prepublish": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "compile": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "watch": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "package": "vsce package --no-dependencies",
     "watch-tests": "tsc -p . -w --outDir dist",
     "pretest": "pnpm run compile",
     "test": "vscode-test",
@@ -89,6 +90,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.1",
+    "esbuild": "^0.25.0",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "~14.18.63",
