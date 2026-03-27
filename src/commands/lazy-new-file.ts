@@ -1,5 +1,6 @@
 import { dirname } from 'node:path';
 import {
+	FileType,
 	type QuickPickItem,
 	type TextDocumentShowOptions,
 	Uri,
@@ -20,13 +21,24 @@ import { findMatchingWorkspacePaths } from '../ws-utils';
 
 export default commands.registerCommand(
 	'lazy-new-file.lazyNewFile',
-	async function lazyNewFile() {
+	async function lazyNewFile(resourceUri?: Uri) {
 		// Create the workspace edit, used when making a file later
 		const wse = new WorkspaceEdit();
-		// The current file directory
-		const currentFileDir = dirname(
-			window.activeTextEditor?.document.fileName || '',
-		);
+		// Determine the base directory. When invoked from the explorer context
+		// menu, VSCode injects the right-clicked resource as resourceUri.
+		// Stat it to distinguish file from folder; fall back to the active editor.
+		let currentFileDir: string;
+		if (resourceUri) {
+			const stat = await workspace.fs.stat(resourceUri);
+			currentFileDir =
+				stat.type === FileType.Directory
+					? resourceUri.fsPath
+					: dirname(resourceUri.fsPath);
+		} else {
+			currentFileDir = dirname(
+				window.activeTextEditor?.document.fileName || '',
+			);
+		}
 
 		const configMap = config.get<Record<string, string>>('aliases') || {};
 		const ladderOpen = config.get('ladderOpen', true);
