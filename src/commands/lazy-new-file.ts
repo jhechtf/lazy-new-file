@@ -29,7 +29,7 @@ export default commands.registerCommand(
 		);
 
 		const configMap = config.get<Record<string, string>>('aliases') || {};
-		const ladderOpen = config.get('lnf.ladderOpen', true);
+		const ladderOpen = config.get('ladderOpen', true);
 
 		const workspaceRootUri = workspace.getWorkspaceFolder(
 			await getWorkspaceUri(
