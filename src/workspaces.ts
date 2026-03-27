@@ -61,8 +61,8 @@ export default async function getWorkspaceUri(
 		if (chosen) {
 			workspaceUri = chosen.uri;
 		} else {
-			// Otherwise we just default to whatever the first workspace is.
-			workspaceUri = workspace.workspaceFolders[0].uri;
+			// Otherwise fall back to the current file's directory.
+			workspaceUri = Uri.file(def);
 		}
 	}
 	// return it all.
