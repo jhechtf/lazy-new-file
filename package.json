@@ -69,7 +69,7 @@
         {
           "group": "2_workspace",
           "command": "lazy-new-file.lazyNewFile",
-          "when": "config.lnf.showExplorerItem && !explorerResourceIsFolder"
+          "when": "config.lnf.showExplorerItem"
         }
       ]
     }
