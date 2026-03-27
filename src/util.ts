@@ -190,8 +190,19 @@ export function showQuickPickWithUserInput(
 		// Handle accept event
 		quickPick.onDidAccept(() => {
 			const selection = quickPick.activeItems[0];
-			resolve(selection);
-			quickPick.hide();
+			/**
+			 * LOGIC: If the selection is a known item and the input hasn't been
+			 * autofilled with its label yet, autofill it so the user can append to it.
+			 * If the value already matches (second Enter) or the item is custom-typed,
+			 * resolve immediately.
+			 */
+			const isKnownItem = items.find((f) => f.label === selection.label) !== undefined;
+			if (isKnownItem && quickPick.value !== selection.label) {
+				quickPick.value = selection.label;
+			} else {
+				resolve(selection);
+				quickPick.hide();
+			}
 		});
 		// Show the quick pick
 		quickPick.show();
