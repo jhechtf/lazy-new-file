@@ -190,18 +190,8 @@ export function showQuickPickWithUserInput(
 		// Handle accept event
 		quickPick.onDidAccept(() => {
 			const selection = quickPick.activeItems[0];
-			/**
-			 * LOGIC: If the selection is not found, then the user has typed in something
-			 * outside of the passed-down options. Otherwise, they have hit enter on a
-			 * quick pick item so we add its value to the input.
-			 */
-			if (items.find((f) => f.label === selection.label) === undefined) {
-				resolve(selection);
-				quickPick.hide();
-				quickPick.items = items;
-			} else {
-				quickPick.value = selection.label;
-			}
+			resolve(selection);
+			quickPick.hide();
 		});
 		// Show the quick pick
 		quickPick.show();
