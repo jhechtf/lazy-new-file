@@ -10,3 +10,7 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
+docs/**
+.claude/
+NOTES.md
+.github
