@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/jhechtf/lazy-new-file/compare/v1.4.0...v1.4.1) (2026-04-12)
+
+
+### Bug Fixes
+
+* correct ladderOpen config key lookup ([fe26de1](https://github.com/jhechtf/lazy-new-file/commit/fe26de1f7bc347e7afa9e291cd16b6497e3150e6))
+* resolve alias selection on first Enter ([86da228](https://github.com/jhechtf/lazy-new-file/commit/86da228e7bf647af3ffc12bc0b97ba4802ece025))
+* show explorer context menu item on folders ([895fe7e](https://github.com/jhechtf/lazy-new-file/commit/895fe7eec9cd1788d8b4d0c6061603a71043f13f))
+* **util:** bug in selection logic for pre-populated list items ([fe63da8](https://github.com/jhechtf/lazy-new-file/commit/fe63da8a6238839d7f4cb2f51f8d01e9faccbe03))
+* workspace picker escape falls back to current file directory ([fdb68af](https://github.com/jhechtf/lazy-new-file/commit/fdb68af33b5c8a6feb93bb3d334a0f9d8f83d674))
+
 ## [1.4.0](https://github.com/jhechtf/lazy-new-file/compare/v1.3.0...v1.4.0) (2026-03-16)
 
 
